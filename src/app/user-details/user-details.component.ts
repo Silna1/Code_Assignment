@@ -12,18 +12,24 @@ import { variable } from '@angular/compiler/src/output/output_ast';
 
 export class UserDetailsComponent implements OnInit {
 public data:any = []
+public selectedId :any;
 
 variable ='https://gorest.co.in/public-api/users';
-Name = this.getData()
+//Name = this.getData()
 
 
-  constructor(private router: Router,private http: HttpClient ,private activatedroute:ActivatedRoute) {
-    
-   
-  }
-
-  ngOnInit(){
+constructor(private router: Router,private http: HttpClient,private route: ActivatedRoute) {
 }
+
+  ngOnInit(): void {
+    let id = this.route.snapshot.params['id'];
+    this.selectedId = id;
+    console.log(this.selectedId)
+    this.getData1(this.selectedId)
+  
+   }
+   
+
 
   getData(){
     const url ='https://gorest.co.in/public-api/users'

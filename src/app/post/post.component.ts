@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap} from '@angular/router';
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: 'app-post',
@@ -9,19 +10,39 @@ import { Router } from '@angular/router';
 export class PostComponent implements OnInit {
 
   post = "my name is silna"
-  constructor(private router: Router) { }
-
-
+  public selectedId :any;
+  //posts = this.getData2();
+  public data:any = []
+  variable ='https://gorest.co.in/public-api/users';
+  constructor(private router: Router,private http: HttpClient,private route: ActivatedRoute) {
+  }
+ 
   ngOnInit(): void {
-  /*  this.posts.getPosts().subscribe((data : any[])=>{
-      console.log(data);
-      this.post = data;
-  })*/
-  console.log("silna in post")
+     let id = this.route.snapshot.params['user_id'];
+     this.selectedId = id;
+     console.log(this.selectedId)
+     this.getData2();
+    }
+
+
+  getData2(){
+    const url ='https://gorest.co.in/public-api/posts'
+    this.http.get(url).subscribe((res)=>{
+      this.data = res
+      console.log(this.data)
+    })
+  }
+
+  getData21(id:number){
+    const url = `${this.variable}/${id}`;
+    this.http.get(url).subscribe((res)=>{
+      this.data = res
+      console.log(this.data)
+    })
   }
 
   ViewComments(){
-    /* const url ='https://gorest.co.in/public-api/posts'
+    /* const url ='https://gorest.co.in/public-api/comments'
      this.http.get(url).subscribe((res)=>{
        this.userData = res
        console.log(this.userData)*/

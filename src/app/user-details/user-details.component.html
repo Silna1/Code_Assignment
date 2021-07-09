@@ -8,13 +8,13 @@
 				<!-- SIDEBAR USERPIC -->
 				<!-- END SIDEBAR USERPIC -->
 				<!-- SIDEBAR USER TITLE -->
-                <div *ngFor="let program of data.data">
+            <!--    <div *ngFor="let program of data.data">-->
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name">
-						{{program.name}}
+						{{data.data.name}}
 					</div>
 					<div class="profile-usertitle-job">
-						{{program.email}}
+						{{data.data.email}}
 					</div>
 				</div>
 				<!-- END SIDEBAR USER TITLE -->
@@ -30,22 +30,22 @@
 						<li class="active">
 							<a href="#">
 							<i class="glyphicon glyphicon-home"></i>
-							Overview </a>
+							Gender :  {{data.data.gender}} </a>
 						</li>
 						<li>
 							<a href="#">
 							<i class="glyphicon glyphicon-user"></i>
-							Account Settings </a>
+							Status  :  {{data.data.status}} </a>
 						</li>
 						<li>
 							<a href="#" target="_blank">
 							<i class="glyphicon glyphicon-ok"></i>
-							Tasks </a>
+							Created  :  {{data.data.created_at}} </a>
 						</li>
 						<li>
 							<a href="#">
 							<i class="glyphicon glyphicon-flag"></i>
-							Help </a>
+							Updated  :   {{data.data.updated_at}} </a>
 						</li>
 					</ul>
 				</div>

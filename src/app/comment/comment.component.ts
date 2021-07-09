@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from "@angular/common/http";
+
 
 @Component({
   selector: 'app-comment',
@@ -9,7 +11,9 @@ import { Router } from '@angular/router';
 export class CommentComponent implements OnInit {
 
   comment = "My name is comment";
-  constructor(private router: Router) { }
+  posts = this.getData3();
+  public data:any = []
+  constructor(private router: Router,private http: HttpClient) { }
 
 
   ngOnInit(): void {
@@ -18,6 +22,14 @@ export class CommentComponent implements OnInit {
       this.comment = data;
   })*/
   console.log("silna in comment")
+  }
+
+  getData3(){
+    const url ='https://gorest.co.in/public-api/posts'
+    this.http.get(url).subscribe((res)=>{
+      this.data = res
+      console.log(this.data)
+    })
   }
 
 }

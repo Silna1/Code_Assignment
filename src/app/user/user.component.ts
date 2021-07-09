@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 import { HttpClient } from "@angular/common/http";
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap} from '@angular/router';
 
 
 @Component({
@@ -11,14 +11,22 @@ import { Router } from '@angular/router';
 })
 export class UserComponent {
 
-  title = 'program';
+ title = 'program';
+ public selectedId :any;
  p: number = 1;
  public data:any = []
  public data1:any =[]
  public userData:any =[]
  variable ='https://gorest.co.in/public-api/users';
- constructor(private router: Router,private http: HttpClient) {
+ constructor(private router: Router,private http: HttpClient,private route: ActivatedRoute) {
  }
+
+ ngOnInit(): void {
+    let id = this.route.snapshot.params['id'];
+    this.selectedId = id;
+    console.log(this.selectedId)
+  
+   }
 
 
   getData(){
@@ -29,14 +37,15 @@ export class UserComponent {
     })
   }
  
-  UserClicked(){
+  UserClicked(userDetails:any){
   /*  console.log(id)
     const url = `${this.variable}/${id}`;
     this.http.get(url).subscribe((res)=>{
       this.data1 = res
       console.log(this.data1)
     })*/
-     this.router.navigate(['/userDetails']);
+    console.log(userDetails)
+     this.router.navigate(['/userDetails',userDetails]);
  }
 
 }
